@@ -1,0 +1,17 @@
+import React, { Component } from 'react'
+import { Route } from 'react-router-dom'
+
+import LoggedIn from './logged_in'
+
+const LoggedInRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) => (
+      <LoggedIn>
+        <Component {...props} />
+      </LoggedIn>
+    )}
+  />
+)
+
+export default LoggedInRoute
