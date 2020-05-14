@@ -98,10 +98,10 @@ var config = {
               name: 'files/[hash].[ext]'
             }
           },
-          {
-            loader: 'image-webpack-loader',
-            options: {}
-          }
+          // {
+          //   loader: 'image-webpack-loader',
+          //   options: {}
+          // }
         ]
       }
     ]

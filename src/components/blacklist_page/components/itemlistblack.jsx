@@ -26,6 +26,9 @@ const styles = (theme) => ({
         height:'100%',
         paddingLeft: '8px',
         paddingRight: '8px',
+        position: 'absolute',
+        right: '-320px',
+        top: '0',
     },
     list:{
         height:'100%'
@@ -59,9 +62,18 @@ const styles = (theme) => ({
       },
 });
 class Itemlist extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+          isopen: false,
+          bgColor: '',
+          idActive: ''
+        };
+      }
 	render() {
 		const { classes } = this.props;
-
+        console.log(this.props);
+        
 		return (
 			<div className={classes.root}>
 				<Grid container className={classes.list}>
@@ -69,91 +81,30 @@ class Itemlist extends Component {
                         {/* <img src={logo} alt="Logo" /> */}
                     </Grid>
                     <Grid item xs={9}>
-                        <Card className={classes.blacklist}>
-                            <CardContent className={classes.customCard}>
-                                <Typography variant="h6" component="h4" className={classes.size}>
-                                75h1-1234
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Camera Hà Huy Tập 1
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Hòa Khê, Thanh Khê, Đà Nẵng
-                                </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    26/10/2019 08:43:19
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                        <Card className={classes.blacklist}>
-                            <CardContent className={classes.customCard}>
-                                <Typography variant="h6" component="h4" className={classes.size}>
-                                75h1-1234
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Camera Hà Huy Tập 1
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Hòa Khê, Thanh Khê, Đà Nẵng
-                                </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    26/10/2019 08:43:19
-                                </Typography>
-                                
-                            </CardContent>
-                        </Card>
-                        <Card className={classes.blacklist}>
-                            <CardContent className={classes.customCard}>
-                                <Typography variant="h6" component="h4" className={classes.size}>
-                                75h1-1234
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Camera Hà Huy Tập 1
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Hòa Khê, Thanh Khê, Đà Nẵng
-                                </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    26/10/2019 08:43:19
-                                </Typography>
-                                
-                            </CardContent>
-                        </Card>
-                        <Card className={classes.blacklist}>
-                            <CardContent className={classes.customCard}>
-                                <Typography variant="h6" component="h4" className={classes.size}>
-                                75h1-1234
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Camera Hà Huy Tập 1
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Hòa Khê, Thanh Khê, Đà Nẵng
-                                </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    26/10/2019 08:43:19
-                                </Typography>
-                                
-                            </CardContent>
-                        </Card>
-                        <Card className={classes.blacklist}>
-                            <CardContent className={classes.customCard}>
-                                <Typography variant="h6" component="h4" className={classes.size}>
-                                75h1-1234
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Camera Hà Huy Tập 1
-                                </Typography>
-                                <Typography variant="body2" component="p" className={classes.title}>
-                                    Hòa Khê, Thanh Khê, Đà Nẵng
-                                </Typography>
-                                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                    26/10/2019 08:43:19
-                                </Typography>
-                                
-                            </CardContent>
-                        </Card>
-             
+                        {/* {this.props.itemcamera.map((itemcamera)=>{
+                            onClick={this.props.onClick(this.props.itemcamera)}//card map
+                            return( */}
+                                <Card className={classes.blacklist}>
+                                    <CardContent className={classes.customCard}>
+                                        <Typography variant="h6" component="h4" className={classes.size}>
+                                        
+                                        {this.props.itemcamera.licensePlate}
+                                        </Typography>
+                                        <Typography variant="body2" component="p" className={classes.title}>
+                                        {this.props.itemcamera.adress}
+
+
+                                        </Typography>
+                                        <Typography variant="body2" component="p" className={classes.title}>
+                                        {this.props.itemcamera.distric}
+                                        </Typography>
+                                        <Typography className={classes.title} color="textSecondary" gutterBottom>
+                                        {this.props.itemcamera.date}
+                                        </Typography>
+                                    </CardContent>
+                                </Card>
+                            {/* );
+                        })} */}
                     </Grid>
 				</Grid>
 			</div>

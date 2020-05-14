@@ -1,6 +1,6 @@
-import React,{Component} from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Grid from "@material-ui/core/Grid";
+import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
@@ -16,6 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DashboardLayout from 'components/dashboard_layout';
 import Itemlist from 'components/blacklist_page/components/itemlistblack';
+import Map from 'components/blacklist_page/gg map/map'
 
 const SitemapPage = () => (
   <DashboardLayout>
@@ -26,37 +27,37 @@ const SitemapPage = () => (
 );
 
 const styles = (theme) => ({
-	root: {
-		flexGrow: 1,
-    width: '200px',
+  root: {
+    flexGrow: 1,
+    width: '230px',
     zIndex: 3,
     boxShadow: '5px 0 5px -5px #333',
-    height:'100%',
-    position:'relative',
+    height: '100%',
+    position: 'relative',
   },
-  wrapGrid : {
-    display : 'flex',
+  wrapGrid: {
+    display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'start',
-    height:'100%'
+    height: '100%',
   },
-  bground:{
+  bground: {
     backgroundColor: '#e0e0e0',
   },
-	paper: {
+  paper: {
     color: theme.palette.text.secondary,
-    height:'100%',
+    height: '100%',
     paddingLeft: '8px',
     paddingRight: '10px',
-	},
-	customTab: {
-		width: '100%',
-	},
-	customCard: {
-		padding: 0,
-		'&:last-child': {
+  },
+  customTab: {
+    width: '100%',
+  },
+  customCard: {
+    padding: 0,
+    '&:last-child': {
       padding: 0,
-		},
+    },
   },
   bullet: {
     display: 'inline-block',
@@ -69,160 +70,241 @@ const styles = (theme) => ({
   fab: {
     position: 'absolute',
     bottom: '0',
-    right:'0'
+    right: '0',
   },
-  iconeditbuton:{
-    padding:'0'
+  iconeditbuton: {
+    padding: '0',
   },
-  size:{
+  icondeletebuton:{
+    padding:'0',
+  },
+  size: {
     fontSize: 16,
   },
-  listblck:{
-    height:'100%'
+  // listblck: {
+  //   height: '100%',
+  // },
+  blacklist: {
+    marginTop: '1px',
   },
-  blacklist:{
-    marginTop:'1px',
-  },
-  link:{
+  link: {
     textDecoration: 'none',
   },
-  iconedit:{
-    fontSize:'15px',
+  iconedit: {
+    fontSize: '15px',
     padding: 0,
   },
-  icondelete:{
-    fontSize:'15px',
+  icondelete: {
+    fontSize: '15px',
     padding: 0,
+    marginLeft:'8px',
   },
-
 });
 class Blacklist extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isopen:false,
-      bgColor:''
-    }
-  }
-  
-  handleClick() { 
-    this.setState({isopen:!this.state.isopen,bgColor:[#e0e0e0]});
-}
-	render() {
-		const { classes } = this.props;
+      list: [
+        {
+          id: 0,
+         itemcamera: [{
+          id:0,
+          licensePlate: '47h1-1234',
+          adress:'Camera Hà Huy Tập 2',
+          distric:'Hòa Khê, Thanh Khê, Đà Nẵng',
+          date:'26/10/2019 08:43:19'
+         }
+         ],
+          
 
-		return (
-			<div className={classes.wrapGrid}>
-				<Grid container className={classes.root}>
-					<Grid item xs={12} container className={classes.listmenu} >
-						<Paper square>
-							<Tabs
-								value={0}
-								indicatorColor='primary'
-								textColor='primary'
-								aria-label='disabled tabs example'
-							>
-							<Tab className={classes.customTab} label='Danh Sách' />
-							</Tabs>
-						</Paper>
-					</Grid>
-					<Grid className={classes.paper} item xs={12}>
-            <a href="#" className={classes.link} >
-            <Card className={classes.blacklist} 
-              className={classes.bground[this.state.bgColor]}
-               onClick={() => {
-                this.handleClick()
-              }}
-            >
-              <CardContent className={classes.customCard}>
-                <Typography variant="h1" component="h1" className={classes.size}>
-                  75h1-1234
-                </Typography>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  dgfdg
-                </Typography>
-                <Typography className={classes.title} color="textSecondary">
-                <Tooltip title="Delete">
-                  <IconButton aria-label="Edit" className={classes.iconeditbuton}>
-                    <EditIcon className={classes.iconedit}/>
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Delete">
-                  <IconButton aria-label="delete">
-                    <DeleteIcon className={classes.icondelete} />
-                  </IconButton>
-                </Tooltip>
-                </Typography>
-              </CardContent>
-            </Card>
+          licensePlate: '43h1-1234',
+          rangeOfVehicle: 'xe máy',
+          isactive: false,
+        },
+        {
+          id: 1,
+          itemcamera: [{
+            id:1,
+            licensePlate: '44h1-1234',
+            adress:'Camera Hà Huy Tập 1',
+            distric:'Hòa Khê, Thanh Khê, Đà Nẵng',
+            date:'26/10/2019 08:43:19'
+          }
+
+          ],
+          isactive: false,
+          licensePlate: '5h1-12534',
+          rangeOfVehicle: 'xe máy',
+        },
+        {
+          id: 2,
+          itemcamera:[ {
+            id:2,
+            licensePlate: '85h1-1234',
+            adress:'Camera Hà Huy Tập 1',
+            distric:'Hòa Khê, Thanh Khê, Đà Nẵng',
+            date:'26/10/2019 08:43:19'
+
+          }],
+          isactive: false,
+          licensePlate: '75h1-1234',
+          rangeOfVehicle: 'xe máy',
+        },
+        {
+          id: 3,
+          itemcamera: [{
+            id:3,
+            licensePlate: '75h1-1234',
+            adress:'Camera Hà Huy Tập 1',
+            distric:'Hòa Khê, Thanh Khê, Đà Nẵng',
+            date:'26/10/2019 08:43:19'
+
+          }],
+          isactive: false,
+          licensePlate: '75h1-1234',
+          rangeOfVehicle: 'xe máy',
+        },
+        {
+          id: 4,
+          itemcamera: [{
+            id:4,
+            licensePlate: '75h1-1234',
+            adress:'Camera Hà Huy Tập 1',
+            distric:'Hòa Khê, Thanh Khê, Đà Nẵng',
+            date:'26/10/2019 08:43:19'
+
+          }],
+          isactive: false,
+          licensePlate: '75h1-1234',
+          rangeOfVehicle: 'xe máy',
+        },
+        {
+          id: 5,
+          itemcamera: [{
+            id:5,
+            licensePlate: '75h1-1234',
+            adress:'Camera Hà Huy Tập 1',
+            distric:'Hòa Khê, Thanh Khê, Đà Nẵng',
+            date:'26/10/2019 08:43:19'
+
+          }],
+          isactive: false,
+          licensePlate: '75h1-1234',
+          rangeOfVehicle: 'xe máy',
+        },
+      ],
+      isopen: false,
+      bgColor: '',
+      idActive: '',
+      position: '',
+    };
+  }
+
+
+  handleClick(id) {
+    console.log(id, 'id');
+    this.setState({idActive: id,isopen:!this.state.isopen})
+    
+    // const fetchData = this.state.list;
+
+    // const newArray = fetchData.find((o) => o.id === item);
+    // if (!newArray) {
+    //   return;
+    // }
+
+    // newArray.isactive = true;
+
+    // return this.setState({
+    //   ...this.state,
+    //   list: [...this.state.list, (this.state.list[item].isActive = true)],
+    // });
+  }
+
+  // onClickCheckPositon(item){
+  //   console.log(item, 'item');
+  //   this.setState({position : item.adress})
+  // }
+
+  render() {
+    const { classes } = this.props;
+    console.log(this.state.list);
+
+    return (
+      <div className={classes.wrapGrid}>
+        <Grid container className={classes.root}>
+          <Grid item xs={12} container className={classes.listmenu}>
+            <Paper square>
+              <Tabs value={0} indicatorColor="primary" textColor="primary" aria-label="disabled tabs example">
+                <Tab className={classes.customTab} label="Danh Sách" />
+              </Tabs>
+            </Paper>
+          </Grid>
+          <Grid className={classes.paper} item xs={12}>
+            <a href="#" className={classes.link}>
+              {this.state.list.map((item) => {
+                return (
+                  <Fragment>
+                    <Card
+                    className={this.state.idActive === item.id ? classes.bground : classes.blacklist}
+                    onClick={() => {
+                      this.handleClick(item.id);
+                    }}
+                    >
+                    <CardContent className={classes.customCard}>
+                      <Typography variant="h1" component="h1" className={classes.size}>
+                        {item.licensePlate}
+                      </Typography>
+                      <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {item.rangeOfVehicle}
+                      </Typography>
+                      <Typography className={classes.title} color="textSecondary">
+                        <Tooltip title="Edit">
+                          <IconButton aria-label="Edit" className={classes.iconeditbuton}>
+                            <EditIcon className={classes.iconedit} />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Delete">
+                          <IconButton aria-label="delete"className={classes.icondelete}>
+                            <DeleteIcon className={classes.icondelete} />
+                          </IconButton>
+                        </Tooltip>
+                      </Typography>
+                    </CardContent>
+                  </Card>
+                  {
+                    this.state.idActive === item.id && 
+                  <Grid item xs={12} className={classes.listblck}>
+                    {item.itemcamera.map((camera)=>{
+                      return(
+                        <Itemlist 
+                        itemcamera={camera}
+                        onClick={this.onClickCheckPositon}
+                      />
+                      );
+                    })}
+                  </Grid>
+                  }
+                     
+                  </Fragment>
+                  
+                );
+              })}
             </a>
-            <Card className={classes.blacklist}
-               onClick={() => {
-                this.handleClick()
-              }}
-            >
-              <CardContent className={classes.customCard}>
-                <Typography variant="h6" component="h2" className={classes.size}>
-                  75h1-1234
-                </Typography>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  dgfdg
-                </Typography>
-                <Typography className={classes.title} color="textSecondary">
-                <Tooltip title="Edit">
-                  <IconButton aria-label="Edit" className={classes.iconeditbuton}>
-                    <EditIcon className={classes.iconedit}/>
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Delete">
-                  <IconButton aria-label="delete">
-                    <DeleteIcon className={classes.icondelete} />
-                  </IconButton>
-                </Tooltip>
-                </Typography>
-              </CardContent>
-            </Card>
-            <Card className={classes.blacklist}
-              onClick={() => {
-                this.handleClick()
-              }}
-            >
-              <CardContent className={classes.customCard}>
-                <Typography variant="h6" component="h2" className={classes.size}>
-                  75h1-1234
-                </Typography>
-                <Typography className={classes.title} color="textSecondary" gutterBottom>
-                  dgfdg
-                </Typography>
-                <Typography className={classes.title} color="textSecondary">
-                <Tooltip title="Edit">
-                  <IconButton aria-label="Edit" className={classes.iconeditbuton}>
-                    <EditIcon className={classes.iconedit}/>
-                  </IconButton>
-                </Tooltip>
-                <Tooltip title="Delete">
-                  <IconButton aria-label="delete" className={classes.iconeditdelete}>
-                    <DeleteIcon className={classes.icondelete} />
-                  </IconButton>
-                </Tooltip>
-                </Typography>
-              </CardContent>
-            </Card>
             <Tooltip title="Add" aria-label="add">
               <Fab color="primary" className={classes.fab}>
                 <AddIcon />
               </Fab>
             </Tooltip>
-					</Grid>
-				</Grid>
-     `  <Grid item xs={12} className={classes.listblck}>
-            {this.state.isopen?<Itemlist/>:""}
+          </Grid>
         </Grid>
-			</div>
-		);
-	}
+      
+        <Grid item xs={12}>
+              <Map position={this.state.position}/>
+        </Grid>
+      </div>
+    );
+  }
 }
-
 
 Blacklist.propTypes = {
   classes: PropTypes.object.isRequired,
