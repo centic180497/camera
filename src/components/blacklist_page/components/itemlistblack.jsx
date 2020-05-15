@@ -20,15 +20,15 @@ const SitemapPage = () => (
 );
 const styles = (theme) => ({
 	root: {
-		flexGrow: 1,
-		width: '320px',
-        boxShadow: '5px 0 5px -5px #333',
-        height:'100%',
-        paddingLeft: '8px',
-        paddingRight: '8px',
-        position: 'absolute',
-        right: '-320px',
-        top: '0',
+    flexGrow: 1,
+    width: '320px',
+    boxShadow: '5px 0 5px -5px #333',
+    height:'100%',
+    position:'absolute',
+    paddingLeft: '8px',
+    background: '#ffffff',
+    paddingRight: '8px',
+    top: '0',
     },
     list:{
         height:'100%'
@@ -57,6 +57,9 @@ const styles = (theme) => ({
       size:{
         fontSize: 16,
       },
+      // absolute:{
+      //   position:'absolute',
+      // },
       pos: {
         marginBottom: 12,
       },
@@ -77,7 +80,7 @@ class Itemlist extends Component {
 		return (
 			<div className={classes.root}>
 				<Grid container className={classes.list}>
-                    <Grid item xs={3} className="class">
+                    <Grid item xs={3} className={classes.absolute}>
                         {/* <img src={logo} alt="Logo" /> */}
                     </Grid>
                     <Grid item xs={9}>

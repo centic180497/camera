@@ -16,7 +16,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DashboardLayout from 'components/dashboard_layout';
 import Itemlist from 'components/blacklist_page/components/itemlistblack';
-import Map from 'components/blacklist_page/gg map/map'
+import ItemMap from 'components/blacklist_page/gg map/map'
 
 const SitemapPage = () => (
   <DashboardLayout>
@@ -28,10 +28,13 @@ const SitemapPage = () => (
 
 const styles = (theme) => ({
   root: {
-    flexGrow: 1,
-    width: '230px',
+    width: '210px',
     zIndex: 3,
     boxShadow: '5px 0 5px -5px #333',
+    height: '100%',
+    position: 'relative',
+  },
+  map:{
     height: '100%',
     position: 'relative',
   },
@@ -66,6 +69,7 @@ const styles = (theme) => ({
   },
   title: {
     fontSize: 14,
+    marginLeft:'16px'
   },
   fab: {
     position: 'absolute',
@@ -81,14 +85,27 @@ const styles = (theme) => ({
   size: {
     fontSize: 16,
   },
-  // listblck: {
-  //   height: '100%',
-  // },
+  listblck: {
+    flexGrow: 1,
+    zIndex:'9999',
+    left:'191px',
+    boxShadow: '5px 0 5px -5px #333',
+    height:'100%',
+    position:'absolute',
+    background: '#ffffff',
+    top: '0',
+  },
   blacklist: {
     marginTop: '1px',
   },
+  listmenu:{
+    width:'100%',
+  },
   link: {
     textDecoration: 'none',
+  },
+  setitem:{
+    marginLeft:'16px',
   },
   iconedit: {
     fontSize: '15px',
@@ -99,6 +116,9 @@ const styles = (theme) => ({
     padding: 0,
     marginLeft:'8px',
   },
+  sizeitem:{
+    fontSize:'14px'
+  }
 });
 class Blacklist extends Component {
   constructor(props) {
@@ -232,8 +252,8 @@ class Blacklist extends Component {
     return (
       <div className={classes.wrapGrid}>
         <Grid container className={classes.root}>
-          <Grid item xs={12} container className={classes.listmenu}>
-            <Paper square>
+          <Grid item xs={12}>
+            <Paper className={classes.listmenu}>
               <Tabs value={0} indicatorColor="primary" textColor="primary" aria-label="disabled tabs example">
                 <Tab className={classes.customTab} label="Danh Sách" />
               </Tabs>
@@ -251,12 +271,14 @@ class Blacklist extends Component {
                     }}
                     >
                     <CardContent className={classes.customCard}>
-                      <Typography variant="h1" component="h1" className={classes.size}>
-                        {item.licensePlate}
-                      </Typography>
-                      <Typography className={classes.title} color="textSecondary" gutterBottom>
-                        {item.rangeOfVehicle}
-                      </Typography>
+                      <div className={classes.setitem}>
+                        <Typography variant="h1" component="h1" className={classes.size}>
+                          {item.licensePlate}
+                        </Typography>
+                        <Typography color="textSecondary" gutterBottom className={classes.sizeitem}>
+                          {item.rangeOfVehicle}
+                        </Typography>
+                      </div>
                       <Typography className={classes.title} color="textSecondary">
                         <Tooltip title="Edit">
                           <IconButton aria-label="Edit" className={classes.iconeditbuton}>
@@ -297,10 +319,14 @@ class Blacklist extends Component {
             </Tooltip>
           </Grid>
         </Grid>
-      
-        <Grid item xs={12}>
-              <Map position={this.state.position}/>
+        <Grid container className={classes.map}> 
+          <Grid item xs={12}>
+                <ItemMap position={this.state.position}/>
+          </Grid>
         </Grid>
+        {/* <Grid item xs={12}>
+              <ItemMap position={this.state.position}/>
+        </Grid> */}
       </div>
     );
   }
