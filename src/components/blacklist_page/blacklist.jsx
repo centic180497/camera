@@ -16,7 +16,14 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import DashboardLayout from 'components/dashboard_layout';
 import Itemlist from 'components/blacklist_page/components/itemlistblack';
-import ItemMap from 'components/blacklist_page/gg map/map'
+import ItemMap from 'components/blacklist_page/gg map/map';
+import TextField from '@material-ui/core/TextField';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Button from '@material-ui/core/Button';
 
 const SitemapPage = () => (
   <DashboardLayout>
@@ -88,7 +95,7 @@ const styles = (theme) => ({
   listblck: {
     flexGrow: 1,
     zIndex:'9999',
-    left:'191px',
+    left:'101%',
     boxShadow: '5px 0 5px -5px #333',
     height:'100%',
     position:'absolute',
@@ -213,41 +220,47 @@ class Blacklist extends Component {
           rangeOfVehicle: 'xe máy',
         },
       ],
-      isopen: false,
+      isOpen: false,
       bgColor: '',
       idActive: '',
       position: '',
+      check: '',
+      dataEdit: ''
     };
   }
 
 
   handleClick(id) {
     console.log(id, 'id');
-    this.setState({idActive: id,isopen:!this.state.isopen})
-    
-    // const fetchData = this.state.list;
-
-    // const newArray = fetchData.find((o) => o.id === item);
-    // if (!newArray) {
-    //   return;
-    // }
-
-    // newArray.isactive = true;
-
-    // return this.setState({
-    //   ...this.state,
-    //   list: [...this.state.list, (this.state.list[item].isActive = true)],
-    // });
+    this.setState({idActive: id})
   }
+  handleClickOpen(){
+    console.log('2');
+    
+    // this.setState({isOpen:!this.state.isOpen})
+  };
+
+  handleClose = () => {
+    this.setState({isOpen:false})
+  };
 
   // onClickCheckPositon(item){
   //   console.log(item, 'item');
   //   this.setState({position : item.adress})
   // }
-
+  showModal(e, item){
+    if(item){
+      this.setState({dataEdit: item})
+    } else{
+      this.setState({dataEdit: ''})
+    }
+    this.setState({isOpen: true})
+    
+    
+  }
   render() {
     const { classes } = this.props;
-    console.log(this.state.list);
+    console.log(this.state.dataEdit);
 
     return (
       <div className={classes.wrapGrid}>
@@ -281,7 +294,7 @@ class Blacklist extends Component {
                       </div>
                       <Typography className={classes.title} color="textSecondary">
                         <Tooltip title="Edit">
-                          <IconButton aria-label="Edit" className={classes.iconeditbuton}>
+                          <IconButton aria-label="Edit" className={classes.iconeditbuton} onClick={e => this.showModal(e, item)}>
                             <EditIcon className={classes.iconedit} />
                           </IconButton>
                         </Tooltip>
@@ -313,10 +326,36 @@ class Blacklist extends Component {
               })}
             </a>
             <Tooltip title="Add" aria-label="add">
-              <Fab color="primary" className={classes.fab}>
+              <Fab color="primary" className={classes.fab} onClick={e => this.showModal(e)}>
                 <AddIcon />
               </Fab>
             </Tooltip>
+            <Dialog open={this.state.isOpen} onClose={this.handleClose} aria-labelledby="form-dialog-title">
+              <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  To subscribe to this website, please enter your email address here. We will send updates
+                  occasionally.
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="name"
+                  label="Email Address"
+                  type="email"
+                  defaultValue={this.state.dataEdit?.licensePlate || ''}
+                  fullWidth
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={this.handleClose} color="primary">
+                  Cancel
+                </Button>
+                <Button onClick={this.handleClose} color="primary">
+                  Subscribe
+                </Button>
+              </DialogActions>
+            </Dialog>
           </Grid>
         </Grid>
         <Grid container className={classes.map}> 
