@@ -1,29 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
-import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import AddIcon from '@material-ui/icons/Add';
-import Fab from '@material-ui/core/Fab';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 import DashboardLayout from 'components/dashboard_layout';
 import Itemlist from 'components/blacklist_page/components/itemlistblack';
 import ItemMap from 'components/blacklist_page/gg map/map';
-import TextField from '@material-ui/core/TextField';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from '@material-ui/core/Button';
+import { Formik, Form } from "formik";
+import * as Yup from "yup";
+import {DialogActions,DialogContent,DialogTitle,FormHelperText,Tooltip,Dialog,Button,Grid,Card,Paper,Tabs,Tab,Typography,CardContent,IconButton,TextField,Fab} from '@material-ui/core';
+import {Close as CloseIcon,Edit as EditIcon,Delete as DeleteIcon,Add as AddIcon} from '@material-ui/icons';
+import { Scrollbars } from 'react-custom-scrollbars';
 
 const SitemapPage = () => (
   <DashboardLayout>
@@ -125,6 +110,26 @@ const styles = (theme) => ({
   },
   sizeitem:{
     fontSize:'14px'
+  },
+  color: {
+    color: "red",
+  },
+  formadd:{
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  setheight:{
+    height:'100%'
+  },
+  scroll:{
+  
+  },
+  closeButton:{
+    position: 'absolute',
+    right: theme.spacing(0),
+    top: theme.spacing(0),
+    color: theme.palette.grey[500],
   }
 });
 class Blacklist extends Component {
@@ -234,12 +239,6 @@ class Blacklist extends Component {
     console.log(id, 'id');
     this.setState({idActive: id})
   }
-  handleClickOpen(){
-    console.log('2');
-    
-    // this.setState({isOpen:!this.state.isOpen})
-  };
-
   handleClose = () => {
     this.setState({isOpen:false})
   };
@@ -273,89 +272,133 @@ class Blacklist extends Component {
             </Paper>
           </Grid>
           <Grid className={classes.paper} item xs={12}>
-            <a href="#" className={classes.link}>
-              {this.state.list.map((item) => {
-                return (
-                  <Fragment>
-                    <Card
-                    className={this.state.idActive === item.id ? classes.bground : classes.blacklist}
-                    onClick={() => {
-                      this.handleClick(item.id);
-                    }}
-                    >
-                    <CardContent className={classes.customCard}>
-                      <div className={classes.setitem}>
-                        <Typography variant="h1" component="h1" className={classes.size}>
-                          {item.licensePlate}
-                        </Typography>
-                        <Typography color="textSecondary" gutterBottom className={classes.sizeitem}>
-                          {item.rangeOfVehicle}
-                        </Typography>
-                      </div>
-                      <Typography className={classes.title} color="textSecondary">
-                        <Tooltip title="Edit">
-                          <IconButton aria-label="Edit" className={classes.iconeditbuton} onClick={e => this.showModal(e, item)}>
-                            <EditIcon className={classes.iconedit} />
-                          </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Delete">
-                          <IconButton aria-label="delete"className={classes.icondelete}>
-                            <DeleteIcon className={classes.icondelete} />
-                          </IconButton>
-                        </Tooltip>
-                      </Typography>
-                    </CardContent>
-                  </Card>
-                  {
-                    this.state.idActive === item.id && 
-                  <Grid item xs={12} className={classes.listblck}>
-                    {item.itemcamera.map((camera)=>{
-                      return(
-                        <Itemlist 
-                        itemcamera={camera}
-                        onClick={this.onClickCheckPositon}
-                      />
-                      );
-                    })}
-                  </Grid>
-                  }
-                     
-                  </Fragment>
-                  
-                );
-              })}
-            </a>
+              <Scrollbars className={classes.scroll}>
+              <a href="#" className={classes.link}>
+                {this.state.list.map((item) => {
+                  return (
+                    
+                    <Fragment>
+                          <Card
+                          className={this.state.idActive === item.id ? classes.bground : classes.blacklist}
+                          onClick={() => {
+                            this.handleClick(item.id);
+                          }}
+                          >
+                          <CardContent className={classes.customCard}>
+                            <div className={classes.setitem}>
+                              <Typography variant="h1" component="h1" className={classes.size}>
+                                {item.licensePlate}
+                              </Typography>
+                              <Typography color="textSecondary" gutterBottom className={classes.sizeitem}>
+                                {item.rangeOfVehicle}
+                              </Typography>
+                            </div>
+                            <Typography className={classes.title} color="textSecondary">
+                              <Tooltip title="Edit">
+                                <IconButton aria-label="Edit" className={classes.iconeditbuton} onClick={e => this.showModal(e, item)}>
+                                  <EditIcon className={classes.iconedit} />
+                                </IconButton>
+                              </Tooltip>
+                              <Tooltip title="Delete">
+                                <IconButton aria-label="delete"className={classes.icondelete}>
+                                  <DeleteIcon className={classes.icondelete} />
+                                </IconButton>
+                              </Tooltip>
+                            </Typography>
+                          </CardContent>
+                        </Card>
+                    {
+                      this.state.idActive === item.id && 
+                    <Grid item xs={12} className={classes.listblck}>
+                      {item.itemcamera.map((camera)=>{
+                        return(
+                          <Itemlist 
+                          itemcamera={camera}
+                          onClick={this.onClickCheckPositon}
+                        />
+                        );
+                      })}
+                    </Grid>
+                    }
+                    </Fragment>  
+                       
+                  );
+                })}
+              </a>
+              </Scrollbars>  
+
             <Tooltip title="Add" aria-label="add">
               <Fab color="primary" className={classes.fab} onClick={e => this.showModal(e)}>
                 <AddIcon />
               </Fab>
             </Tooltip>
-            <Dialog open={this.state.isOpen} onClose={this.handleClose} aria-labelledby="form-dialog-title">
-              <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  To subscribe to this website, please enter your email address here. We will send updates
-                  occasionally.
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="name"
-                  label="Email Address"
-                  type="email"
-                  defaultValue={this.state.dataEdit?.licensePlate || ''}
-                  fullWidth
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                  Cancel
-                </Button>
-                <Button onClick={this.handleClose} color="primary">
-                  Subscribe
-                </Button>
-              </DialogActions>
-            </Dialog>
+                <Dialog open={this.state.isOpen} onClose={this.handleClose} aria-labelledby="form-dialog-title-h6">
+                  <DialogTitle id="form-dialog-title">
+                    {this.state.dataEdit?"sửa danh sách đen":"Thêm phương tiên vi phạm vào danh sách đen"}
+                    <IconButton aria-label="close"className={classes.closeButton}  onClick={this.handleClose} >
+                      <CloseIcon />
+                    </IconButton>
+                  </DialogTitle>
+                  <Formik
+                    initialValues={{
+                      xe: "",
+                      bsx: "",
+                    }}
+                    validationSchema={Yup.object({
+                      bsx: Yup.string()
+                        .required("Mô tả không được để trống"),
+                    })}
+                    // onSubmit={(values) => {
+                    //   console.log(values);
+          
+                    //   handleSubmit(values);
+                    // }}
+                  >
+                  {(propsFormik) => (
+                  <Form className={classes.formadd}>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            name="xe"
+                            label="Biển số xe"
+                            type="email"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue={this.state.dataEdit?.licensePlate || ''}
+                            onChange={propsFormik.handleChange}
+                          /> 
+                          <TextField
+                            autoFocus
+                            margin="dense"
+                            id="name"
+                            name="bsx"
+                            label="Mô tả"
+                            type="email"
+                            variant="outlined"
+                            fullWidth
+                            defaultValue={this.state.dataEdit?.rangeOfVehicle || ''}
+                            onChange={propsFormik.handleChange}
+                          />
+                          <div>
+                            <FormHelperText className={classes.color}>
+                              {propsFormik.errors.bsx}
+                            </FormHelperText>
+                          </div>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={this.handleClose} variant="contained">
+                        Hủy
+                      </Button>
+                      <Button onClick={this.handleClose} color="primary" variant="contained">
+                        Thêm
+                      </Button>
+                    </DialogActions>
+                  </Form>
+                  )}
+              </Formik>
+                </Dialog>
           </Grid>
         </Grid>
         <Grid container className={classes.map}> 
