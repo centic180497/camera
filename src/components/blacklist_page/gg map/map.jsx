@@ -4,7 +4,7 @@ import { compose, withProps } from 'recompose';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker, InfoWindow } from 'react-google-maps';
 import { withStyles } from '@material-ui/core/styles';
 
-// import markerIcon from './../../../assets/images/marker.png';
+import markerIcon from "../../../assets/images/marker.png";
 
 const styles = {
   infoWindow: {
@@ -93,7 +93,7 @@ class ItemMap extends React.PureComponent {
       <MyMapComponent
         zoom={zoom}
         location={location}
-        // icon={{ url: markerIcon }}
+        icon={{ url: markerIcon,}}
         onClick={this.handelClick}
         onCloseInfoWindow={this.onCloseInfoWindow}
         greatPlaces={greatPlaces}
