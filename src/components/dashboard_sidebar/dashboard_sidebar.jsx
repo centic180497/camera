@@ -16,7 +16,7 @@ import { Scrollbars } from 'react-custom-scrollbars';
 const styles = {
   root: {
     width: 60,
-    height: '100%',
+    height: 'calc(100vh - 45px)',
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',

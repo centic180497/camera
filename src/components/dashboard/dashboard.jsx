@@ -54,7 +54,7 @@ class Dashboard extends React.Component {
         <LoggedInRoute path={`${this.props.match.url}/blacklist`}>
           <DashboardLayout title="DANH SÁCH ĐEN">
             <Blacklist />
-          </DashboardLayout>
+        </DashboardLayout>
         </LoggedInRoute>
         <LoggedInRoute path={`${this.props.match.url}/violations`}>
           <DashboardLayout title="VI PHẠM">

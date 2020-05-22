@@ -19,17 +19,6 @@ const SitemapPage = () => (
   </DashboardLayout>
 );
 const styles = (theme) => ({
-  // root: {
-  //   flexGrow: 1,
-  //   width: '320px',
-  //   boxShadow: '5px 0 5px -5px #333',
-  //   height:'100%',
-  //   position:'absolute',
-  //   paddingLeft: '8px',
-  //   background: '#ffffff',
-  //   paddingRight: '8px',
-  //   top: '0',
-  //   },
   list: {
     height: '100%'
   },
@@ -58,9 +47,6 @@ const styles = (theme) => ({
   size: {
     fontSize: 16,
   },
-  // absolute:{
-  //   position:'absolute',
-  // },
   pos: {
     marginBottom: 12,
   },

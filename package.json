@@ -47,6 +47,7 @@
   "dependencies": {
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.53",
     "@material-ui/pickers": "^3.2.10",
     "@react-google-maps/api": "^1.9.0",
     "axios": "^0.19.2",
@@ -59,6 +60,7 @@
     "react-dom": "^16.13.1",
     "react-google-maps": "^9.4.5",
     "react-hot-loader": "^4.12.21",
+    "react-leaflet": "^2.7.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-select": "^3.1.0",
